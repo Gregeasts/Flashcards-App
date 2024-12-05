@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMX3s5z0s8w1x/mMDgqj5/1njN8tF3lU7hD2/a" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards App</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="nav">
+                <h1 class="fancy-title">
+                    Decks <i class="fas fa-crown"></i>
+                </h1>
+                <button id="change-theme-btn" onclick="toggleThemeSelector()">
+                    <i class="fas fa-paint-brush"></i> 
+                </button>
+                <span id="home-text" class="home-text" onclick="goHome()" style="display: none;"><i class="fa-solid fa-house"></i></span>
+
+            </div>
+        </div>
+    </header>
+    <div id="theme-selector" class="theme-selector" style="display: none;">
+        <div class="theme-box">
+            <h2>Select a Theme</h2>
+            <button class="close-btn" onclick="closeThemeSelector()">
+                &times; <!-- This represents a close 'X' -->
+            </button>
+            <div class="theme-options">
+                <label for="color1">Primary Color:</label>
+                <input type="color" id="color1" value="#add8e6" onchange="changeColor('--color1', this.value)">
+    
+                <label for="color2">Secondary Color:</label>
+                <input type="color" id="color2" value="#87cefa" onchange="changeColor('--color2', this.value)">
+    
+                <label for="color3">Tertiary Color:</label>
+                <input type="color" id="color3" value="#b0e0e6" onchange="changeColor('--color3', this.value)">
+
+            </div>
+            <h3>Choose a Background Pattern</h3>
+            <select id="pattern-selector" onchange="changePattern(this.value)">
+                <option class="triangles" value="triangles">Triangles</option>
+                <option class="vertical-lines" value="vertical-lines">Vertical Lines</option>
+                <option class="horizontal-lines" value="horizontal-lines">Horizontal Lines</option>
+                <option class="diagonal-stripes" value="diagonal-stripes">Diagonal Stripes</option>
+                <option class="polka-dots" value="polka-dots">Polka Dots</option>
+                <option class="zigzag" value="zigzag">Zigzag</option>
+                <option class="checkerboard" value="checkerboard">Checkerboard</option>
+                <option class="waves" value="waves">Waves</option>
+                <option class="stairway" value="stairway">Stairway</option>
+                <option  value="overlappingcircles">Overlapping Circles</option>
+                <option  value="equals">Equals Pattern</option>
+                <option  value="slants">Slanted Pattern</option>
+                <option  value="gradient">Linear Gradient</option>
+            </select>
+            
+        </div>
+    </div>
+    
+    
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search Decks..." />
+    </div>
+
+    
+    <div class="container">
+        <div class="set-container" id="set-container">
+            <h2>Flashcard Decks</h2>
+            <div class="flashcard add-set" onclick="newSetShown()">
+                <span class="plus">+</span>
+                <h2>Create New Deck</h2>
+            </div>
+        </div>
+
+        <div class="create-set-box" id="set-box" style="display:none;">
+            <h2>Create Flashcard Deck</h2>
+            <label for="set-name">Deck Name</label>
+            <input type="text" id="set-name" placeholder="Enter Deck name" />
+            <input type="text" id="set-description" placeholder="Enter Deck description" />
+            <input type="text" id="set-tags" placeholder="Enter Tags" />
+            
+            
+            <div class="button-group">
+                <button class="create-btn" onclick="createSet()">Create Deck</button>
+                
+                <button class="close-btn" onclick="hideSetBox()">Close</button>
+            </div>
+        </div>
+
+        <div class="create-card-box" id="card-box" style="display:none;">
+            <h2 class="create-card-title">Create Flashcard</h2>
+            
+            <label for="question" class="input-label">Question</label>
+            <textarea id="question" placeholder="Type your question here..." class="flashcard-textarea"></textarea>
+            
+            <label for="answer" class="input-label">Answer</label>
+            <textarea id="answer" placeholder="Type your answer here..." class="flashcard-textarea"></textarea>
+            
+            <label for="questionImage">Upload Question Image:</label>
+            <div class="dropzone" id="questionDropzone">
+                <input type="file" id="questionImage" accept="image/*" style="display:none;" />
+                <p>Drag and drop an image here or click to upload</p>
+            </div>
+            <div class="image-preview" id="questionImagePreviewContainer" style="display:none; flex-direction: row; align-items: center;">
+                <img id="questionImagePreview" style="max-width: 150px; height: auto; margin-top: 10px;" />
+                <button id="removeQuestionImage" class="remove-btn" style="margin-left: 10px;">Remove Image</button>
+            </div>
+            
+            <label for="answerImage">Upload Answer Image:</label>
+            <div class="dropzone" id="answerDropzone">
+                <input type="file" id="answerImage" accept="image/*" style="display:none;" />
+                <p>Drag and drop an image here or click to upload</p>
+            </div>
+            <div class="image-preview" id="answerImagePreviewContainer" style="display:none; flex-direction: row; align-items: center;">
+                <img id="answerImagePreview" style="max-width: 150px; height: auto; margin-top: 10px;" />
+                <button id="removeAnswerImage" class="remove-btn" style="margin-left: 10px;">Remove Image</button>
+            </div>
+            
+            <div class="button-group">
+                <button class="save-btn" onclick="addCard()">Save Card</button>
+                <button class="close-btn" onclick="hideCardBox()">Close</button>
+            </div>
+        </div>
+        
+        
+        
+        
+        <h2 id="set-title" style="display: none;"></h2>
+        <div class="mode-buttons" style="display: none;">
+            <button id="view-mode-btn" onclick="setMode('view')">View Mode</button>
+            <button id="quiz-mode-btn" onclick="setMode('quiz')">Quiz Mode</button>
+        </div>
+        <div class="flashcards" id="flashcards" style="display:none;"></div>
+        <div id="progress-bar-container" style="width: 100%; height: 20px; background: #e0e0e0; display: none;">
+            <div id="progress-bar" style="width: 0; height: 100%; background: #76c7c0;"></div>
+        </div>
+        
+    </div>
+    <div id="overlay" style="display: none;">
+        <div id="modal">
+            <h2>Edit Set Name</h2>
+            <input type="text" id="newSetName" placeholder="Enter new set name" />
+            <input type="text" id="newSetDescription" placeholder="Enter new set description" />
+            <input type="text" id="newSetTags" placeholder="Enter new set tags" />
+            <button id="submitNewName">Submit</button>
+            <button id="cancelEdit">Cancel</button>
+        </div>
+    </div>
+    
+    
+
+    
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+</body>
+<footer class="footer">
+
+    <p>Created by <strong>Greg Eastman</strong></p>
+    <p>Email: <a href="mailto:gregoryeastman23@gmail.com">gregoryeastman23@gmail.com</a></p>
+    <p>Linkedin: <a href="https://www.linkedin.com/in/greg-eastman-2703892b2/" target="_blank">My Linkedin</a></p>
+</footer>
+</html>

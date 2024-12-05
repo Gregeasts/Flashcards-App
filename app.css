@@ -1,0 +1,1260 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap');
+.theme-selector {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Ensure it appears above other content */
+    
+}
+.footer {
+    background-color: #ffffff;  /* White background */
+    padding: 20px;              /* Padding around the footer */
+    display: flex;              /* Use flexbox for layout */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center;        /* Center items vertically */
+    color: #333;                /* Darker text color */
+}
+
+.footer p {
+    margin: 0;                  /* Remove default margin */
+    flex: 1;                    /* Allow each <p> to grow equally */
+    text-align: center;         /* Center align text within each <p> */
+    font-family: 'Arial', sans-serif; /* Clean sans-serif font */
+}
+
+.footer a {
+    color: #007bff;             /* Bootstrap primary color for links */
+    text-decoration: none;       /* No underline */
+}
+
+.footer a:hover {
+    text-decoration: underline;  /* Underline on hover */
+}
+
+#change-theme-btn {
+    position: absolute; /* Position in the top-left */
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor to pointer */
+    color: #333; /* Change icon color */
+    font-size: 24px; /* Change icon size */
+}
+.theme-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 300px; /* Set a width for the box */
+    z-index: 1001; /* Ensure the box is above the overlay background */
+    position: relative; /* Make sure the close button is positioned relative to the box */
+}
+
+.theme-box h2 {
+    margin: 0 0 15px; /* Space below the header */
+    font-size: 1.5em; /* Increase font size */
+    text-align: center; /* Center the header */
+}
+
+.theme-options {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Align items vertically */
+    gap: 10px; /* Space between items */
+    margin-top: 15px; /* Space from header */
+}
+
+.theme-options label {
+    font-size: 1em; /* Font size for labels */
+    margin-bottom: 5px; /* Space below labels */
+}
+
+input[type="color"] {
+    -webkit-appearance: none; /* Remove default styles in WebKit browsers */
+    appearance: none; /* Remove default styles */
+    width: 100%; /* Full width */
+    height: 40px; /* Height for color input */
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 5px; /* Round corners */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    transition: transform 0.2s; /* Smooth transition */
+}
+
+input[type="color"]:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Close button styles */
+.close-btn {
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    color: blue; /* Color for the close button */
+    font-size: 24px; /* Size for the close button */
+    position: absolute; /* Position in the top-right */
+    top: 10px; /* Adjust position */
+    right: 10px; /* Adjust position */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.close-btn:hover {
+    opacity: 0.8; /* Slight hover effect */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--base-background);
+    background-image: 
+        linear-gradient(120deg, transparent 60%, var(--color1) 60%), /* Triangle 1 */
+        linear-gradient(150deg, transparent 60%, var(--color2) 60%), /* Triangle 2 */
+        linear-gradient(180deg, transparent 60%, var(--color3) 60%), /* Triangle 3 */
+        linear-gradient(210deg, transparent 60%, var(--color1) 60%), /* Triangle 4 */
+        linear-gradient(240deg, transparent 60%, var(--color2) 60%), /* Triangle 5 */
+        linear-gradient(270deg, transparent 60%, var(--color3) 60%), /* Triangle 6 */
+        linear-gradient(300deg, transparent 60%, var(--color1) 60%), /* Triangle 7 */
+        linear-gradient(330deg, transparent 60%, var(--color2) 60%), /* Triangle 8 */
+        linear-gradient(360deg, transparent 60%, var(--color3) 60%), /* Triangle 9 */
+        linear-gradient(30deg, transparent 60%, var(--color1) 60%),  /* Triangle 10 */
+        linear-gradient(60deg, transparent 60%, var(--color2) 60%),   /* Triangle 11 */
+        linear-gradient(90deg, transparent 60%, var(--color3) 60%),   /* Triangle 12 */
+        linear-gradient(120deg, transparent 60%, var(--color1) 60%),  /* Triangle 13 */
+        linear-gradient(150deg, transparent 60%, var(--color2) 60%),  /* Triangle 14 */
+        linear-gradient(180deg, transparent 60%, var(--color3) 60%),  /* Triangle 15 */
+        linear-gradient(210deg, transparent 60%, var(--color1) 60%),  /* Triangle 16 */
+        linear-gradient(240deg, transparent 60%, var(--color2) 60%),  /* Triangle 17 */
+        linear-gradient(270deg, transparent 60%, var(--color3) 60%),  /* Triangle 18 */
+        linear-gradient(300deg, transparent 60%, var(--color1) 60%),  /* Triangle 19 */
+        linear-gradient(330deg, transparent 60%, var(--color2) 60%),   /* Triangle 20 */
+        linear-gradient(to right, transparent 35%, var(--color1) 35%, var(--color1) 65%, transparent 65%), /* Horizontal */
+        linear-gradient(to bottom, transparent 35%, var(--color1) 35%, var(--color1) 65%, transparent 65%); /* Vertical */
+    background-size: 800px 800px; /* Size of the triangles */
+    background-repeat: repeat; /* Repeat the background */
+    position: relative; /* Position relative for any absolute positioning of future elements */
+    width: 100%;
+}
+:root {
+    --color1: #add8e6; /* Original color for gradients */
+    --color2: #87cefa; /* Original color for gradients */
+    --color3: #b0e0e6; /* Original color for gradients */
+    --base-background: #f4f4f4; /* Base background color */
+    --background-pattern: linear-gradient(120deg, transparent 60%, var(--color1) 60%), /* Triangle 1 */
+                          linear-gradient(150deg, transparent 60%, var(--color2) 60%), /* Triangle 2 */
+                          linear-gradient(180deg, transparent 60%, var(--color3) 60%), /* Triangle 3 */
+                          linear-gradient(210deg, transparent 60%, var(--color1) 60%), /* Triangle 4 */
+                          linear-gradient(240deg, transparent 60%, var(--color2) 60%), /* Triangle 5 */
+                          linear-gradient(270deg, transparent 60%, var(--color3) 60%), /* Triangle 6 */
+                          linear-gradient(300deg, transparent 60%, var(--color1) 60%), /* Triangle 7 */
+                          linear-gradient(330deg, transparent 60%, var(--color2) 60%), /* Triangle 8 */
+                          linear-gradient(360deg, transparent 60%, var(--color3) 60%), /* Triangle 9 */
+                          linear-gradient(30deg, transparent 60%, var(--color1) 60%),  /* Triangle 10 */
+                          linear-gradient(60deg, transparent 60%, var(--color2) 60%),   /* Triangle 11 */
+                          linear-gradient(90deg, transparent 60%, var(--color3) 60%),   /* Triangle 12 */
+                          linear-gradient(120deg, transparent 60%, var(--color1) 60%),  /* Triangle 13 */
+                          linear-gradient(150deg, transparent 60%, var(--color2) 60%),  /* Triangle 14 */
+                          linear-gradient(180deg, transparent 60%, var(--color3) 60%),  /* Triangle 15 */
+                          linear-gradient(210deg, transparent 60%, var(--color1) 60%),  /* Triangle 16 */
+                          linear-gradient(240deg, transparent 60%, var(--color2) 60%),  /* Triangle 17 */
+                          linear-gradient(270deg, transparent 60%, var(--color3) 60%),  /* Triangle 18 */
+                          linear-gradient(300deg, transparent 60%, var(--color1) 60%),  /* Triangle 19 */
+                          linear-gradient(330deg, transparent 60%, var(--color2) 60%),   /* Triangle 20 */
+                          linear-gradient(to right, transparent 35%, var(--color1) 35%, var(--color1) 65%, transparent 65%), /* Horizontal */
+                          linear-gradient(to bottom, transparent 35%, var(--color1) 35%, var(--color1) 65%, transparent 65%); /* Vertical */
+}
+#pattern-selector {
+    width: 120px;
+    height: 40px;
+    background-color: white;
+
+    border: 1px solid #ccc;
+}
+
+/* General styles for the options */
+#pattern-selector option {
+    height: 40px;
+    width: 40px;
+    background-size: 100% 100%;
+    background-position: center;
+    display: block;
+}
+.vertical-lines {
+    --background-pattern: repeating-linear-gradient(
+        to right,
+        var(--color1),
+        var(--color1) 10px,
+        var(--color2) 10px,
+        var(--color2) 20px
+    );
+}
+
+.stairway {
+    --s: 52px; /* control the size*/
+
+    
+    --_g: 0 120deg,#0000 0;
+    background:
+      conic-gradient(             at calc(250%/3) calc(100%/3),var(--color3) var(--_g)),
+      conic-gradient(from -120deg at calc( 50%/3) calc(100%/3),var(--color2) var(--_g)),
+      conic-gradient(from  120deg at calc(100%/3) calc(250%/3),var(--color1) var(--_g)),
+      conic-gradient(from  120deg at calc(200%/3) calc(250%/3),var(--color1) var(--_g)),
+      conic-gradient(from -180deg at calc(100%/3) 50%,var(--color2)  60deg,var(--color1) var(--_g)),
+      conic-gradient(from   60deg at calc(200%/3) 50%,var(--color1)  60deg,var(--color3) var(--_g)),
+      conic-gradient(from  -60deg at 50% calc(100%/3),var(--color1) 120deg,var(--color2) 0 240deg,var(--color3) 0);
+    background-size: calc(var(--s)*sqrt(3)) var(--s);
+}
+
+.overlappingcircles {
+    --s: 150px; /* control the size*/
+
+    
+    --_g: 
+       var(--color1) 0%  5% ,var(--color2) 6%  15%,var(--color1) 16% 25%,var(--color2) 26% 35%,var(--color1) 36% 45%,
+       var(--color2) 46% 55%,var(--color1) 56% 65%,var(--color2) 66% 75%,var(--color1) 76% 85%,var(--color2) 86% 95%,
+       #0000 96%;
+    background:
+      radial-gradient(50% 50% at 100% 0,var(--_g)),
+      radial-gradient(50% 50% at 0 100%,var(--_g)),
+      radial-gradient(50% 50%,var(--_g)),
+      radial-gradient(50% 50%,var(--_g)) calc(var(--s)/2) calc(var(--s)/2)
+      var(--color1);
+    background-size: var(--s) var(--s);
+  }
+.equals {
+    --s: 200px; /* control the size*/
+
+    
+    --_g: #0000 8%,var(--color1) 0 17%,#0000 0 58%;
+    background: 
+      linear-gradient(135deg,#0000 20.5%,var(--color1) 0 29.5%,#0000 0) 0 calc(var(--s)/4),
+      linear-gradient( 45deg,var(--_g)) calc(var(--s)/2) 0,
+      linear-gradient(135deg,var(--_g),var(--color1) 0 67%,#0000 0),        
+      linear-gradient( 45deg,var(--_g),var(--color1) 0 67%,#0000 0 83%,var(--color1) 0 92%,#0000 0),
+      var(--color2); 
+    background-size: var(--s) var(--s);
+  }
+/* Horizontal lines pattern */
+.horizontal-lines {
+    --background-pattern: repeating-linear-gradient(
+        to bottom,
+        var(--color1),
+        var(--color1) 10px,
+        var(--color2) 10px,
+        var(--color2) 20px
+    );
+}
+/* Diagonal stripes pattern */
+.diagonal-stripes {
+    --background-pattern: repeating-linear-gradient(
+        45deg,
+        var(--color1),
+        var(--color1) 20px,
+        var(--color2) 20px,
+        var(--color2) 40px
+    );
+}
+
+/* Polka dots pattern */
+.polka-dots {
+    --background-pattern: radial-gradient(circle at 25% 25%, var(--color1) 12%, transparent 13%),
+                          radial-gradient(circle at 75% 75%, var(--color2) 12%, transparent 13%);
+    background-size: 100px 100px;
+    background-color: var(--base-background);
+}
+
+
+/* Zigzag pattern */
+.zigzag {
+    --background-pattern: repeating-linear-gradient(
+        135deg,
+        var(--color1) 25%,
+        transparent 25%,
+        transparent 50%,
+        var(--color2) 50%,
+        var(--color2) 75%,
+        transparent 75%
+    );
+    background-size: 50px 50px;
+}
+
+/* Checkerboard pattern */
+.checkerboard {
+    --background-pattern: linear-gradient(45deg, var(--color1) 25%, transparent 25%, transparent 75%, var(--color1) 75%),
+                          linear-gradient(45deg, var(--color2) 25%, transparent 25%, transparent 75%, var(--color2) 75%);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+}
+
+
+
+/* Waves pattern */
+.waves {
+    --background-pattern: repeating-radial-gradient(
+        circle at 50% 50%, var(--color1) 10%, transparent 20%
+    );
+    background-size: 150px 150px;
+}
+
+
+/* Apply the selected background pattern */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--base-background);
+    background-image: var(--background-pattern);
+    background-size: 800px 800px;
+    background-repeat: repeat;
+    position: relative;
+    width: 100%;
+}
+
+.fancy-box {
+    border-radius: 25px; /* More pronounced rounded corners for a bubble effect */
+    
+    padding: 20px 30px; /* Padding for a larger appearance */
+    
+    margin: 10px 0; /* Margin above and below the box */
+    font-size: 2em; /* Larger font size for the title */
+    text-align: center; /* Center text alignment */
+    display: inline-block; /* Display as inline-block to respect width */
+    font-weight: bold; /* Bold text for the title */
+    color: black; /* White text color for better contrast against the gradient */
+    
+    font-family: 'Bubblegum Sans', cursive; /* Use the bubble font */
+}
+.dragging {
+    opacity: 0.5; /* Dim the dragged card */
+}
+
+.drag-over {
+    border: 2px dashed #ccc; /* Show a dashed border on hover */
+}
+
+/* Add some styles to the h2 to further enhance the bubble effect */
+.fancy-box h2 {
+    margin: 0; /* Remove default margin */
+}
+
+
+.home-text {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #4CAF50;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.set-icon {
+    font-size: 2rem; /* Adjust size as needed */
+    color: #333; /* Adjust color as needed */
+    margin-bottom: 10px;
+}
+
+
+#set-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-bottom: 2px solid #4CAF50;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.home-text:hover {
+    color: #388E3C; /* Darker green on hover */
+}
+
+
+header {
+    background: white;
+}
+
+
+
+.container {
+    width: 95%;
+    margin: auto;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    height: 8vh;
+}
+
+
+.performance-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top of everything */
+}
+
+.overlay-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 60%; /* Or any desired width */
+    position: absolute; /* Change this to 'relative', 'fixed', or 'absolute' */
+    top: 60px; /* Moves the element 200px from the top of its positioned parent or the viewport */
+    left: 50%; /* Centers the overlay horizontally */
+    transform: translateX(-50%); /* Ensures perfect centering */
+}
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it sits on top of other content */
+}
+
+#modal {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+   
+}
+
+#modal input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
+.overlay-close {
+    cursor: pointer;
+    font-size: 24px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.set-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.flashcard {
+    border: 5px solid rgb(99, 84, 1); /* Adds a gold outline */
+    border-radius: 8px; /* Optional: to give rounded corners */
+    position: relative;
+    width: 360px;
+    height: 240px;
+    margin: 10px;
+    background: white;
+    
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    
+    
+    cursor: pointer;
+}
+.performance-set {
+    background-color: #2196F3; /* Change to your desired blue */
+    color: black; /* Ensure text is readable */
+}
+
+.flashcard:hover {
+    transform: scale(1.05);
+}
+
+.add-set {
+    background: #4CAF50;
+    
+}
+
+
+.quiz-results {
+    text-align: center;  /* Center the text */
+    padding: 20px;      /* Add padding around the results */
+    border: 2px solid #4CAF50; /* Optional: Add a border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background */
+    margin-top: 20px;   /* Space above the results */
+}
+
+.quiz-title {
+    font-size: 24px;    /* Title size */
+    color: #333;        /* Title color */
+    margin-bottom: 10px; /* Space below title */
+}
+
+.score-label {
+    font-size: 20px;    /* Label size */
+    color: #555;        /* Label color */
+    margin: 10px 0;    /* Space above and below the label */
+}
+
+.score {
+    font-size: 22px;    /* Score size */
+    font-weight: bold;  /* Make score bold */
+    color: #4CAF50;     /* Green color for the score */
+}
+
+
+
+.add-set .plus {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.create-set-box{
+    border: 2px solid rgba(245, 245, 245, 0.8); /* Slightly darker border for better visibility */
+    width: 90%; /* Change width to a percentage for responsiveness */
+    max-width: 480px; /* Set a max width to limit size on larger screens */
+    margin: auto;
+    margin-top: 20px;
+    background: rgba(245, 245, 245, 0.95); /* Make background slightly more opaque */
+    border-radius: 8px; /* Slightly larger border radius for a softer look */
+    padding: 20px; /* Increased padding for a more spacious layout */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+    overflow-y: auto; /* Maintain overflow handling */
+}
+
+.create-set-box label{
+    margin-top: 10px; /* Increased margin for better spacing */
+    font-weight: bold; /* Make labels bold for emphasis */
+    display: block; /* Ensures labels occupy their own line */
+}
+
+.create-set-box input,
+.create-card-box input,
+.create-set-box textarea,
+.create-card-box textarea { /* Added textarea for styling consistency */
+    width: 100%;
+    border-radius: 5px;
+    font-family: inherit;
+    border: 1px solid lightgrey;
+    padding: 12px; /* Increased padding for better usability */
+    margin-bottom: 15px; /* Adjusted margin for consistent spacing */
+    box-sizing: border-box; /* Ensure padding is included in total width */
+}
+
+.create-set-box textarea,
+.create-card-box textarea {
+    resize: vertical; /* Allow vertical resizing for text areas */
+    min-height: 80px; /* Set a minimum height for better usability */
+}
+
+.flashcards {
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.flashcard-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-question{
+    border-top: 1px solid red;
+    padding: 5px;
+    text-align: center;
+    margin: 0;
+    white-space: normal; /* Allows text to wrap onto new lines */
+    word-wrap: break-word; /* Ensures long words break and don't overflow */
+    max-width: 100%; /* Ensures the card does not exceed its container */
+}
+.card-answer{
+    border-top: 1px solid green;
+    padding: 5px;
+    text-align: center;
+    margin: 0;
+    white-space: normal; /* Allows text to wrap onto new lines */
+    word-wrap: break-word; /* Ensures long words break and don't overflow */
+    max-width: 100%; /* Ensures the card does not exceed its container */
+}
+
+
+.card-question {
+    font-weight: bold;
+}
+
+
+.delete-card {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color:#a71e00;
+    color: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-card:hover {
+    background-color: darkred;
+}
+.edit-card {
+    position: absolute;  /* Position the button absolutely */
+    top: 10px;          /* Distance from the top */
+    left: 10px;         /* Distance from the left */
+    background-color: transparent; /* Make background transparent */
+    border: none;       /* Remove border */
+    cursor: pointer;    /* Change cursor to pointer on hover */
+    padding: 5px;      /* Add some padding for better click area */
+    z-index: 1000;     /* Ensure it's on top of other elements */
+}
+
+/* Optional: Hover effect for the button */
+.edit-card:hover {
+    color: #007BFF;  /* Change color on hover */
+}
+
+@media(max-width:520px) {
+    .flashcard {
+        width: 180px;
+        height: 100px;
+    }
+
+    .create-set-box, .create-card-box {
+        width: 300px;
+    }
+}
+
+@media(max-width:355px) {
+    .nav {
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .create-set-box, .create-card-box {
+        width: 200px;
+    }
+}
+
+/* Styling for the create set box */
+.create-set-box {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+/* Title styling */
+.create-set-box h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Label styling */
+.create-set-box label {
+    font-size: 14px;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+/* Input styling */
+#create-set-box input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Button group styling */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* General button styling */
+.create-set-box button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Specific button colors */
+.create-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.close-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Button hover effect */
+.create-set-box button:hover {
+    opacity: 0.9;
+}
+/* Styling for the create card box */
+.create-card-box {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+    overflow-y: auto;
+    max-height: 80vh; /* Set a maximum height for scrolling */
+}
+
+/* Title styling */
+.create-card-box h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Label styling */
+.create-card-box label {
+    font-size: 14px;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+/* Textarea styling */
+#create-card-box textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+    resize: vertical; /* Allow vertical resizing only */
+}
+
+/* Button group styling */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* General button styling */
+.create-card-box button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Specific button colors */
+.save-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.close-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Button hover effect */
+.create-card-box button:hover {
+    opacity: 0.9;
+}
+.mode-buttons {
+    display: flex;                  /* Use flexbox for centering */
+    justify-content: center;        /* Center the buttons horizontally */
+    margin: 20px 0;                /* Space above and below the buttons */
+}
+
+.mode-buttons button {
+    margin: 0 10px;                /* Add some horizontal space between buttons */
+    padding: 10px 15px;            /* Button padding */
+    font-size: 16px;               /* Font size for buttons */
+    cursor: pointer;                /* Pointer cursor on hover */
+}
+.fancy-title {
+    font-family: 'Georgia', serif; /* Fancy font-family, you can choose another */
+    font-size: 3rem; /* Adjust size as needed */
+    font-weight: bold; /* Make it bold */
+    color: #000000; /* Change color to fit with your design */
+    text-align: center; /* Center the title */
+    position: relative; /* Allows positioning of elements */
+    background: linear-gradient(to right, #070002, #1d2b64); /* Gradient background, adjust colors as needed */
+    -webkit-background-clip: text; /* Makes the background clip to the text */
+    -webkit-text-fill-color: transparent; /* Makes the text transparent so background shows */
+    padding: 20px; /* Adds padding around the title */
+    margin: 20px 0; /* Adds margin above and below */
+}
+
+.fancy-title i {
+    color: gold; /* Color for the crown icon */
+    margin-left: 10px; /* Space between text and icon */
+    font-size: 1.2em; /* Adjust icon size */
+}
+
+
+.flashcard {
+    border: 3px solid gold; /* Adds a gold outline */
+    border-radius: 8px; /* Optional: to give rounded corners */
+    /* Add some styles for flashcard display */
+    padding: 20px;
+    
+    margin: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.flashcard .delete-card {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: red;
+}
+
+.quiz-buttons {
+    display: flex;                /* Use flexbox for alignment */
+    justify-content: center;      /* Center buttons horizontally */
+    margin-top: 15px;            /* Space above the buttons */
+}
+
+.quiz-buttons button {
+    margin: 0 10px;              /* Space between buttons */
+    padding: 10px 15px;          /* Button padding for better click area */
+    font-size: 18px;             /* Button font size */
+    background-color: #4CAF50;   /* Green background */
+    color: white;                 /* White text color */
+    border: none;                 /* Remove default border */
+    border-radius: 5px;          /* Rounded corners for buttons */
+    cursor: pointer;              /* Change cursor to pointer */
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.quiz-buttons button:hover {
+    background-color: #45a049;    /* Darker green on hover */
+}
+
+.card-answer {
+    margin-bottom: 10px; /* Space between answer and delete button */
+}
+
+.delete-card {
+    margin-bottom: 15px; /* Space between delete button and quiz buttons container */
+}
+
+.quiz-buttons-container {
+    bottom: 10px; /* Space above quiz buttons container */
+    right:10px;
+}
+#setContainer {
+    margin-top: 20px;
+}
+
+#setContainer .set-item {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#searchBar {
+    width: 50%; /* Adjust width as needed */
+    max-width: 500px;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    outline: none;
+    transition: all 0.3s ease;
+    
+}
+.plus-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it sits on top of other elements */
+}
+
+.overlay-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto; /* Enable scrolling if content is too long */
+}
+
+.close-overlay {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+#searchBar::placeholder {
+    color: #aaa;
+}
+
+#searchBar:focus {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+.quiz-buttons button {
+    margin: 0 5px; /* Add space between buttons */
+}
+
+
+.mistakes-set {
+    background-color: gold; /* Adjust the color as needed */
+    /* Add any other styles you want */
+}
+.consolidate-set {
+    background-color: orange; /* Adjust the color as needed */
+    /* Add any other styles you want */
+}
+.daily-set {
+    background-color: rgb(247, 3, 137); /* Adjust the color as needed */
+    /* Add any other styles you want */
+}
+
+/* Box styling */
+.create-card-box {
+    background-color: #ffffff;
+    padding: 30px; /* Increased padding for better spacing */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 40px auto;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Title styling */
+.create-card-title {
+    font-size: 2em; /* Slightly larger for prominence */
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Label styling */
+.input-label {
+    display: block;
+    font-size: 1.1em; /* Increased font size for readability */
+    color: #333;
+    margin-top: 15px; /* Increased margin for better spacing */
+    margin-bottom: 5px;
+    text-align: left;
+}
+#progress-bar-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px; /* Adjust height as needed */
+    background-color: #e0e0e0; /* Background for the progress bar */
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0; /* Start with no width */
+    background-color: #76c7c0; /* Green color for the progress */
+    transition: width 0.5s; /* Smooth transition for filling */
+}
+/* Add this to your CSS file */
+
+/* CSS for larger flashcards in quiz mode */
+.flashcard-large .flashcard {
+    width: 60%; /* Set flashcards to 60% width */
+    max-height: 400px; /* Adjust height as needed */
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    font-size: 1.2em; /* Increase font size for better readability */
+    white-space: normal; /* Allow text to wrap onto the next line */
+    word-wrap: break-word; /* Break long words onto the next line if necessary */
+}
+.expo{
+    margin-top: 50px;
+    text-align: center;
+}
+.card-label{
+    padding:5px;
+    margin:4px;
+}
+.dropzone {
+    border: 2px dashed #007bff; /* Blue dashed border */
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.dropzone:hover {
+    background-color: #f0f8ff; /* Light blue background on hover */
+}
+
+/* Textarea styling */
+.flashcard-textarea {
+    width: 90%;
+    padding: 15px; /* More padding for better text placement */
+    margin: 5px 0 15px 0;
+    font-size: 1em;
+    border-radius: 8px;
+    
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+    resize: vertical; /* Allow vertical resizing only */
+    font-family: 'Arial', sans-serif; /* Ensure consistency in font */
+    background-color: #f9f9f9; /* Light background for contrast */
+}
+
+.flashcard-textarea:focus {
+    outline: none;
+    border-color: #76c7c0; /* Highlight border color on focus */
+    background-color: #fff; /* Change background color on focus */
+}
+
+/* Button group styling */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Save button styling */
+.save-btn {
+    background-color: #4CAF50;
+    color: #ffffff;
+    font-size: 1em;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.save-btn:hover {
+    background-color: #45a049;
+    box-shadow: 0 4px 10px rgba(0, 128, 0, 0.3);
+}
+
+/* Close button styling */
+.close-btn {
+    background-color: #d9534f;
+    color: #ffffff;
+    font-size: 1em;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: #c9302c;
+    box-shadow: 0 4px 10px rgba(128, 0, 0, 0.3);
+}
+
+
+.overlay-content {
+    padding: 20px; /* Add padding around the overlay content */
+    background-color: #ffffff; /* Background color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 90%; /* Adjust width as needed */
+    max-width: 600px; /* Maximum width */
+    margin: auto; /* Center the overlay */
+}
+
+.performance-stats {
+    margin-bottom: 20px; /* Space between stats and charts */
+}
+
+.charts-container {
+    margin-bottom: 20px; /* Space between charts and select box */
+}
+
+label {
+    display: block; /* Make label take a whole line */
+    margin: 10px 0; /* Add space above and below the label */
+}
+
+select {
+    width: 100%; /* Full width for the select box */
+    padding: 8px; /* Padding for better touch targets */
+    margin-bottom: 20px; /* Space below the select box */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.overlay-close {
+    cursor: pointer; /* Change cursor to pointer for close button */
+    color: #ff0000; /* Color for close button */
+    font-size: 20px; /* Increase font size */
+    text-align: right; /* Align close button to the right */
+    margin-top: 20px; /* Space above close button */
+}
+.star-rating {
+    display: flex;
+    justify-content: center; /* Center the stars */
+    margin-top: 10px; /* Add some space between stars and content */
+}
+
+.star {
+    font-size: 24px; /* Size of the stars */
+    color: #ccc; /* Default unfilled color */
+    cursor: pointer; /* Make stars clickable */
+    padding: 0 5px; /* Add space between stars */
+}
+
+.star.filled {
+    color: gold; /* Color for filled stars */
+}
+/* Define background images for patterns */
+.pattern1 {
+    background-image: url('path-to-pattern1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.slants {
+    --s: 36px; /* control the size*/
+
+    
+    --g1: conic-gradient(at calc(250%/3) calc(50%/3),var(--color2) 60deg,#0000 0 300deg,var(--color1) 0);
+    --g2: conic-gradient(at calc(50%/3) 50%,#0000 75%,var(--color1) 0);
+    --g3: conic-gradient(at calc(100%/3) 50%,#0000 75%,var(--color2) 0);
+    --g4: conic-gradient(from 59deg at calc(200%/3) calc(249%/9),var(--color3) 61deg,#0000 62deg);
+    --g5: conic-gradient(from 60deg at 50% calc(250%/3),#f1f1f1 /*4th color*/ 60deg,var(--color1) 0 120deg,#0000 0);
+    --_p: calc(9*tan(30deg)*var(--s));
+    background:
+      var(--g1) calc(-1*var(--s)) 0,var(--g1) calc(2*var(--s)) var(--_p),
+      var(--g2),var(--g2) calc(3*var(--s)) var(--_p),
+      var(--g3),var(--g3) calc(3*var(--s)) var(--_p),
+      var(--g4),var(--g4) calc(3*var(--s)) var(--_p),
+      var(--g5) calc(3*var(--s)) 0,var(--g5) 0 var(--_p) var(--color3);
+    background-size: calc(6*var(--s)) calc(2*var(--_p))
+}
+
+.gradient {
+
+    
+    /* Gradient background */
+    background: linear-gradient(to right, var(--color1), var(--color2), var(--color3));
+    
+    /* Full size and position */
+    width: 100vw;  /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    position: relative; /* Position relative to allow for content on top */
+}
+
